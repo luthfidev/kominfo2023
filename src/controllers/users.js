@@ -69,7 +69,7 @@ module.exports = {
       if (isExistUsername.length > 0) throw new Error('Username already exists')
 
       const userData = { username, password, email, id_level };
-      const results = await userModel.createuser(userData);
+      const results = await userModel.createUser(userData);
 
       if (!results) throw new Error('Failed create user');
 
@@ -132,14 +132,20 @@ module.exports = {
   },
 
   deleteUser: async (req, res) => {
-    const { id } = req.params
+    const { id } = req.body;
     try {
 
-      const checkId = await userModel.getuserByCondition({ id: parseInt(id) })
+      const deleted_at = new Date()
+      const checkId = await userModel.getUserByCondition({ id: parseInt(id) })
       
       if (checkId.length < 1) throw new Error("user not found");
 
-      const results = await userModel.deleteUser({ id: parseInt(id) });
+      const deleteData = [
+        { deleted_at },
+        { id }
+      ]
+
+      const results = await userModel.deleteUser(deleteData);
 
       if (!results) throw new Error("Failed delete user");
 

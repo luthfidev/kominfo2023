@@ -5,6 +5,12 @@ const usersController = require('../controllers/users')
 
 router
   .get('/list', usersController.getAllUser)
+  .post('/',
+    usersController.createUser)
+  .post('/update',
+    usersController.updateUser)
+  .post('/delete',
+    usersController.deleteUser)
   .post('/detail',
     usersController.detailUser)
 

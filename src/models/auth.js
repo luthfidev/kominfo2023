@@ -6,10 +6,10 @@ module.exports = {
                             u.email,
                             u.username, 
                             u.password, 
-                            l.nama_level, 
+                            l.name as level_name, 
                             l.id as id_level,
                             l.name as name_level
-                      FROM user u
+                      FROM users u
                      JOIN level l ON l.id = u.id_level WHERE u.username = ?`
     return new Promise((resolve, reject) => {
       db.query(sql, data.username, (error, results) => {
@@ -21,29 +21,4 @@ module.exports = {
       })
     })
   },
-
-
-  signUp: (data) => {
-    const sql = 'INSERT INTO user SET ?'
-    return new Promise((resolve, reject) => {
-      db.query(sql, data, (error, results) => {
-        if (error) {
-          reject(Error(error))
-        }
-        resolve(true)
-      })
-    })
-  },
-
-  signUpAdmin: (data) => {
-    const sql = 'INSERT INTO user SET ?'
-      return new Promise((resolve, reject) => {
-        db.query(sql, data, (error, results) => {
-          if (error) {
-            reject(Error(error))
-          }
-          resolve(true)
-        })
-      })
-  }
 }

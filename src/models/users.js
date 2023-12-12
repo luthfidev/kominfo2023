@@ -76,7 +76,6 @@ module.exports = {
 
 
   updateUser: (data) => {
-    console.log(data)
     const sql = 'UPDATE users SET ? WHERE ?'
     return new Promise((resolve, reject) => {
       db.query(sql, data, (error, results) => {
@@ -89,7 +88,8 @@ module.exports = {
   },
 
   deleteUser: (data) => {
-    const sql = 'UPDATE FROM users SET ? WHERE ?'
+    console.log(data)
+    const sql = 'UPDATE users SET ? WHERE ?'
     return new Promise((resolve, reject) => {
       db.query(sql, data, (error, results) => {
         if (error) {
